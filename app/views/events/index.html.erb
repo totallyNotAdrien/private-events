@@ -11,10 +11,13 @@
 
 <div id="events">
   <% @events.each do |event| %>
+  <div class="box">
     <%= render event %>
     <p>
       <%= link_to "Show this event", event %>
     </p>
+  </div>
+    
   <% end %>
 </div>
 
