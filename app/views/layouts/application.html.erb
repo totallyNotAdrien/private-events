@@ -21,6 +21,35 @@
         <p class="alert"><%= alert %></p>
       </div>
     <% end %>
+    <nav class="navbar is-info">
+      <div class="navbar-brand">
+        <%= link_to root_path, class: "navbar-item" do%>
+          <h1 class="title is-5">Private Events</h1>
+        <% end %>
+
+        <div class="navbar-burger burger" data-target="navbarExample">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div id="navbarExample" class="navbar-menu">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="field is-grouped">
+              <% if user_signed_in? %>
+                <%#= link_to "New Post", new_post_path, class: "control button is-info is-inverted" %>
+                <%= link_to current_user.name, user_path(current_user.id), class: "control button is-info" %>
+                <%= link_to "Log out", destroy_user_session_path, class: "control button is-info", data:{"turbo-method": :delete} %>
+              <% else %>
+                <%= link_to "Log In", new_user_session_path, class: "control button is-info" %>
+                <%= link_to "Sign Up", new_user_registration_path, class: "control button is-info" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>
