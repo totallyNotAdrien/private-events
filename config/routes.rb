@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :event_confirmations
   devise_for :users, controllers: {registrations: "registrations"}
   resources :events
   resources :users, only: [:show]

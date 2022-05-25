@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Event confirmations</h1>
+
+<div id="event_confirmations">
+  <% @event_confirmations.each do |event_confirmation| %>
+    <%= render event_confirmation %>
+    <p>
+      <%= link_to "Show this event confirmation", event_confirmation %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New event confirmation", new_event_confirmation_path %>
