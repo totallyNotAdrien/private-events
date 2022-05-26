@@ -1,4 +1,4 @@
 class EventConfirmation < ApplicationRecord
-  belongs to :attendee, class_name: "User"
-  belongs to :event
+  belongs_to :attendee, class_name: "User"
+  belongs_to :event
 end
