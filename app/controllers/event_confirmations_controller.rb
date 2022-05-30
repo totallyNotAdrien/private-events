@@ -22,14 +22,18 @@ class EventConfirmationsController < ApplicationController
 
   # POST /event_confirmations or /event_confirmations.json
   def create
-    @event_confirmation = current_user.event_confirmations.build(event_confirmation_params)
+    #params[:attendee_id] = current_user.id
+    #params.merge(attendee_id: current_user.id)
+    #@event_confirmation = current_user.event_confirmations.build(event_confirmation_params)
+    @event_confirmation = current_user.event_confirmations.build(attendee_id: current_user.id, event_id: params[:event_id])
 
     respond_to do |format|
       if @event_confirmation.save
-        format.html { redirect_to event_confirmation_url(@event_confirmation), notice: "Event confirmation was successfully created." }
+        format.html { redirect_to event_path(@event_confirmation.event), notice: "You successfully joined this event." }
         format.json { render :show, status: :created, location: @event_confirmation }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        #format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to root_path, alert: "Failed to join event" }
         format.json { render json: @event_confirmation.errors, status: :unprocessable_entity }
       end
     end
@@ -66,6 +70,7 @@ class EventConfirmationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_confirmation_params
-      params.fetch(:event_confirmation, {})
+      #params.fetch(:event_confirmation, {}).permit(:event_id, :attendee_id)
+      params.require(:event_confirmation).permit(:event_id, :attendee_id)
     end
 end
