@@ -12,6 +12,7 @@
     <%= button_to "Destroy this event", @event, method: :delete,  data: { confirm: "Are you sure you want to delete this?" } %>
   <% end %>
 </div>
+<br><br>
 <div>
   <% if user_signed_in?%>
     <% if !@event.attendees.include?(current_user) %>
@@ -20,4 +21,13 @@
       <%= "You have joined this event" %>
     <% end %>
   <% end %>
+</div>
+<br><br>
+<div>
+  <div class="title is-3">Attendees</div>
+  <ul>
+    <% @event.attendees.each do |attendee| %>
+      <li><%= attendee.name %></li>
+    <% end %>
+  </ul>
 </div>
